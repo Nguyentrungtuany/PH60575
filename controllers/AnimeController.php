@@ -1,6 +1,7 @@
 <?php
 // có class chứa các function thực thi xử lý logic
 require_once __DIR__ . '/../models/UserModel.php';
+require_once __DIR__ . '/../models/AnimeModel.php';
 
 class AnimeController
 {
@@ -13,9 +14,12 @@ class AnimeController
 
     public function Home()
     {
+        $animes = $this->modelProduct->getTrendingAnimes(); // lấy danh sách trending
         
-        require_once './views/index.php';
+        require_once './views/index.php'; // truyền $animes sang view
+
     }
+
     public function categories()
     {
         require_once './views/categories.php';
@@ -57,23 +61,27 @@ class AnimeController
     }
 
     public function handle_login() {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-    $user = UserModel::findByEmail($email);
+        $user = UserModel::findByEmail($email);
 
-    if ($user && $user['password_hash'] === $password) {
-        $_SESSION['user'] = $user;
-        if ($user['role'] === 'admin') {
-            header('Location: ./admin/index.php');
-            exit; // 🔥 BẮT BUỘC
+        if ($user && $user['password_hash'] === $password) {
+            $_SESSION['user'] = $user;
+            if ($user['role'] === 'admin') {
+                header('Location: ./admin/index.php');
+                exit; // 🔥 BẮT BUỘC
+            } else {
+                header('Location: index.php');
+                exit;
+            }
         } else {
-            header('Location: index.php');
+            echo "<script>alert('Sai email hoặc mật khẩu'); window.location.href='?act=login';</script>";
             exit;
         }
-    } else {
-        echo "<script>alert('Sai email hoặc mật khẩu'); window.location.href='?act=login';</script>";
-        exit;
     }
-}
+
+    
+
+
 }
