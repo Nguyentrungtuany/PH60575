@@ -35,4 +35,5 @@ match ($act) {
     'index-admin' => (new AdminUserController())->list(),
     // ✅ Thêm dòng này để xử lý khi act = handle_login
     'handle_login' => (new AnimeController())->handle_login(),
+    'anime-search' => (new AnimeController())->search(),
 };

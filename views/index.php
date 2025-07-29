@@ -65,13 +65,16 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right d-flex align-items-center">
-                        <form class="from-search d-flex align-items-center" method="GET" action="">
+                        <form class="d-flex align-items-center" method="GET" action="index.php">
+                            <input type="hidden" name="act" value="anime-search">
                             <input type="search" name="keyword" placeholder="Nhập tên phim bạn muốn tìm..." 
-                                style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                                style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;"
+                                value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>">
                             <button type="submit" style="border: none; background: none; margin-left: 5px;">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </form>
+
                         <a href="?act=login" style="margin-left: 15px;"><span class="icon_profile"></span></a>
                     </div>
                 </div>
@@ -163,7 +166,7 @@
                                             <li><?= $anime['genre_name'] ?></li>
                                         </ul>
                                         <h5><a href="index.php?url=anime/detail&id=<?= $anime['id'] ?>">
-                                            <?= $anime['description'] ?>
+                                            <?= $anime['title'] ?>
                                         </a></h5>
                                     </div>
                                 </div>

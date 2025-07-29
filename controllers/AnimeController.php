@@ -81,7 +81,14 @@ class AnimeController
         }
     }
 
-    
+
+    public function search() {
+    $keyword = $_GET['keyword'] ?? '';
+    $animes = $this->modelProduct->searchAnime($keyword); // gọi hàm truy vấn SQL
+
+    require_once './views/anime-search.php'; // View kết quả tìm kiếm
+}
+
 
 
 }

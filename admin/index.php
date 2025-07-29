@@ -36,6 +36,11 @@ match ($act) {
     'update-admin' => (new AdminUserController())->update(),
     'add-admin' => (new AdminUserController())->add(), 
     'create-admin' => (new AdminUserController())->create(),
+    'anime-admin' => (new AdminAnimeController())->anime(),
+    // 'anime-admin' => (new AdminAnimeController())->list(),
+    // 'delete-anime' => (new AdminAnimeController())->Delete($_GET['id'] ?? null),
+    // 'edit-anime' => (new AdminAnimeController())->edit($_GET['id'] ?? null),
+    // 'update-anime' => (new AdminAnimeController())->update(),
     default => require_once '../views/admin/404.php'
 };
 ?>
