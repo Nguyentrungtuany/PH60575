@@ -33,7 +33,9 @@ match ($act) {
     'blog' => (new AnimeController())->blog(),
     'update-admin' => (new AdminUserController())->update(),
     'index-admin' => (new AdminUserController())->list(),
-    // ✅ Thêm dòng này để xử lý khi act = handle_login
     'handle_login' => (new AnimeController())->handle_login(),
     'anime-search' => (new AnimeController())->search(),
+    'handle_signup' => (new AnimeController())->handle_signup(),
+    'logout' => (new AnimeController())->logout(),
+    'profile' => (new AnimeController())->profile(), // Thêm route cho trang cá nhân
 };

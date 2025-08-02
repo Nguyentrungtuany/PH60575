@@ -26,7 +26,7 @@
         </div>
 
         <!-- Form chỉnh sửa -->
-        <form action="<?= BASE_URL_ADMIN . '?act=update-admin&id=' . $user['id'] ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= BASE_URL_ADMIN . '?act=update-anime&id=' . $anime['id'] ?>" method="POST" enctype="multipart/form-data">
           <div class="flex-auto px-4 pt-4 pb-6">
             <div class="overflow-x-auto w-full">
               <table class="table-auto w-full text-slate-500 border-collapse">
@@ -36,44 +36,47 @@
                   <tr>
                     <td class="px-6 py-3 font-bold bg-gray-100">Ảnh</td>
                     <td class="px-6 py-3">
-                      <img src="<?php echo BASE_URL . $user['avata'] ?>"  alt="avata" class="w-9 h-9 rounded-xl mr-4" />
-                      <input type="file" name="avata">
+                      <img src="<?php echo BASE_URL . $anime['poster_url'] ?>"  alt="poster_url" class="w-9 h-9 rounded-xl mr-4" />
+                      <input type="file" name="poster_url">
 
                     </td>
                   </tr>
 
                   <!-- Tên và Gmail -->
                   <tr>
-                    <td class="px-6 py-3 font-bold bg-gray-100">Tên (Gmail)</td>
+                    <td class="px-6 py-3 font-bold bg-gray-100">Tên (Tiêu đề)</td>
                     <td class="px-6 py-3">
                       
                         <input class="" 
-                               name="username" value="<?= htmlspecialchars($user['username'] ?? '') ?>" />
+                               name="title" value="<?= htmlspecialchars($anime['title'] ?? '') ?>" />
                         <input class=" text-sm text-slate-600" 
-                               name="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" />
+                               name="description" value="<?= htmlspecialchars($anime['description'] ?? '') ?>" />
+                      </div>
                     </td>
                   </tr>
 
                   <!-- Chức vụ và mật khẩu -->
                   <tr>
-                    <td class="px-6 py-3 font-bold bg-gray-100">Chức vụ và mật khẩu</td>
+                    <td class="px-6 py-3 font-bold bg-gray-100">Năm (Link trailer)</td>
                     <td class="px-6 py-3">
-                        <select name="role" id="role" class=" text-sm text-slate-600">
-                          <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
-                          <option value="user" <?= $user['role'] === 'user' ? 'selected' : '' ?>>User</option>
-                        </select>
-                        <input type="text" name="password_hash" id="password_hash"
-                               class=" text-sm text-slate-600"
-                               value="<?= htmlspecialchars($user['password_hash'] ?? '') ?>" />
+                      
+                        <input class="" 
+                               name="release_year" value="<?= htmlspecialchars($anime['release_year'] ?? '') ?>" />
+                        <input class=" text-sm text-slate-600" 
+                               name="trailer_url" value="<?= htmlspecialchars($anime['trailer_url'] ?? '') ?>" />
+                      </div>
                     </td>
                   </tr>
 
                   <!-- Thời gian tạo -->
                   <tr>
-                    <td class="px-6 py-3 font-bold bg-gray-100">Thời gian</td>
-                    <td class="px-6 py-3 text-slate-500">
-                      <input type="text" class="border border-gray-200 bg-gray-50 rounded px-2 py-1 w-full"
-                             value="<?= $user['created_at'] ?? 'N/A' ?>" disabled />
+                    <td class="px-6 py-3 font-bold bg-gray-100">Tổng số tập (số tập đã phát hành)</td>
+                    <td class="px-6 py-3">
+                      
+                        <input class="" 
+                               name="episodes_total" value="<?= htmlspecialchars($anime['episodes_total'] ?? '') ?>" />
+                        <input class=" text-sm text-slate-600" 
+                               name="episodes_released" value="<?= htmlspecialchars($anime['episodes_released'] ?? '') ?>" />
                     </td>
                   </tr>
 

@@ -97,17 +97,21 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Sign Up</h3>
-                        <form action="#">
+                        <form action="?act=handle_signup" method="POST">
                             <div class="input__item">
-                                <input type="text" placeholder="Email address">
+                                <input type="email" name="email" placeholder="Email">
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Your Name">
+                                <input type="text" name="username" placeholder="User Name">
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password">
+                                <input type="password" name="password_hash" placeholder="Mật khẩu">
+                                <span class="icon_lock"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="password" name="confirm_password" placeholder="Xác nhận mật khẩu">
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Login Now</button>

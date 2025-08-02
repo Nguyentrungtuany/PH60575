@@ -45,10 +45,9 @@
                   <tr>
                     <td class="px-6 py-3 font-bold bg-gray-100">Tên (Gmail)</td>
                     <td class="px-6 py-3">
-                      <div class="flex flex-col gap-2">
+                      
                         <input class="" name="username"  placeholder="Nhập tên"/>
                         <input class=" text-sm text-slate-600" name="email"  placeholder="Nhập email" />
-                      </div>
                     </td>
                   </tr>
 
@@ -62,8 +61,7 @@
                             <option value="user" <?= isset($data['role']) && $data['role'] == 'user' ? 'selected' : '' ?>>User</option>
 
                         </select>
-                      </div>
-                      <div>
+                     
                         <input type="text" name="password_hash" id="password_hash"class="" placeholder="Nhâp mật khẩu"/>
                       </div>
                     </td>
@@ -74,7 +72,7 @@
                     <td class="px-6 py-3 font-bold bg-gray-100">Thời gian</td>
                     <td class="px-6 py-3 text-slate-500">
                       <input type="text" class="border border-gray-200 bg-gray-50 rounded px-2 py-1 w-full"
-                              disabled />
+                             placeholder="Thời gian tự thêm với thời gian hiện tại " disabled />
                     </td>
                   </tr>
 

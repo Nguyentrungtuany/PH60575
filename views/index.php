@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,6 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS (dropdown cần JS để hoạt động) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="./commons/css/bootstrap.min.css" type="text/css">
@@ -73,9 +79,25 @@
                             <button type="submit" style="border: none; background: none; margin-left: 5px;">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
+                            <?php if (isset($_SESSION['user'])): ?>
+                            <div class="dropdown">
+                                <button class="btn btn-dark dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="<?php echo $_SESSION['user']['avata']; ?>"  width="50" class="me-2">
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li class="dropdown-item text-muted"><i class="bi bi-file-earmark-person"></i> Xin chào, <strong><?php echo htmlspecialchars($_SESSION['user']['username']); ?></strong></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-dark " href="?act=profile"><i class="bi bi-pencil"></i> Cập nhật thông tin</a></li>
+                                    <li><a class="dropdown-item text-dark" href="?act=logout"><i class="bi bi-door-open"></i> Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                             <a href="?act=login" style="margin-left: 15px;"><span class="icon_profile"></span></a>
+                        <?php endif; ?>
+
                         </form>
 
-                        <a href="?act=login" style="margin-left: 15px;"><span class="icon_profile"></span></a>
+                        <!-- <a href="?act=login" style="margin-left: 15px;"><span class="icon_profile"></span></a> -->
                     </div>
                 </div>
 
@@ -654,19 +676,7 @@
           </div>
       </div>
   </footer>
-  <!-- Footer Section End -->
-
-  <!-- Search model Begin -->
-  <!-- <div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch"><i class="icon_close"></i></div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
-        </form>
-    </div>
-</div> -->
-<!-- Search model end -->
-
+  
 <!-- Js Plugins -->
 <script src="./commons/js/jquery-3.3.1.min.js"></script>
 <script src="./commons/js/bootstrap.min.js"></script>

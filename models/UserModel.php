@@ -3,15 +3,34 @@ require_once __DIR__ . '/../commons/function.php'; // import hàm
 
 class UserModel {
     public $conn;
+
     public function __construct() {
-        $this->conn = connectDB(); // hàm connectDB() đã được định nghĩa rồi
+        $this->conn = connectDB();
     }
-    public static function findByEmail($email) {
-        $conn = connectDB(); 
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+
+        public function createUser($username, $email, $password_hash) {
+            $sql = "INSERT INTO users (username, email, password_hash, role, avata)
+                VALUES (:username, :email, :password, 'user', :avata)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+            ':username' => $username,
+            ':email' => $email,
+            ':password' => $password_hash,
+            ':avata' => 'admin/assets/img/team-2.jpg',
+            // ':role' => 'user'
+
+
+        ]);
+        }
+    
+
+    public function findByEmail($email) {
+        // $conn = connectDB();
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
     public function All(){
         // $sql = "SELECT co.*, ins.name as instructor_name  FROM courses as co 
         // JOIN instructor as ins
@@ -62,4 +81,6 @@ class UserModel {
         $stmt->bindParam(':avata', $data['avata']);
         return $stmt->execute();
     }
+
+    
 }
