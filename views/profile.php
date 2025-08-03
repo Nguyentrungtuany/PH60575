@@ -2,10 +2,7 @@
 <?php
 require_once __DIR__ . '/layout/header.php';
 
-$user = $_SESSION['user'] ?? null;
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-// session_start();
+
 
 ?>
 
@@ -24,8 +21,8 @@ ini_set('display_errors', 1);
         <div class="row g-0 align-items-center">
             <!-- Avatar -->
             <div class="col-md-4 text-center p-4 bg-dark rounded-start-4">
-                <img src="<?= htmlspecialchars($user['avata']) ?>" class="rounded-circle border border-light mb-3" width="120" height="120" alt="Avatar">
-                <h4 class="fw-bold mb-0"><?= htmlspecialchars($user['username']) ?></h4>
+                <img src="<?= htmlspecialchars($users['avata']) ?>" class="rounded-circle border border-light mb-3" width="120" height="120" alt="Avatar">
+                <h4 class="fw-bold mb-0"><?= htmlspecialchars($users['username']) ?></h4>
                 <small class="text-light">Thành viên Anime</small>
             </div>
 
@@ -35,14 +32,14 @@ ini_set('display_errors', 1);
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-secondary text-white d-flex justify-content-between">
                         <span><i class="bi bi-person-fill me-2"></i>Họ và tên</span>
-                        <strong><?= htmlspecialchars($user['fullname'] ?? 'Chưa cập nhật') ?></strong>
+                        <strong><?= htmlspecialchars($users['username'] ?? 'Chưa cập nhật') ?></strong>
                     </li>
                     <li class="list-group-item bg-secondary text-white d-flex justify-content-between">
                         <span><i class="bi bi-envelope-fill me-2"></i>Email</span>
-                        <strong><?= htmlspecialchars($user['email'] ?? 'Chưa cập nhật') ?></strong>
+                        <strong><?= htmlspecialchars($users['email'] ?? 'Chưa cập nhật') ?></strong>
                     </li>
                 </ul>
-                <a href="?act=edit-profile" class="btn btn-danger mt-4">
+                <a href="?act=edit-profile&id=<?= $users['id'] ?>" class="btn btn-danger mt-4">
                     <i class="bi bi-pencil-square me-1"></i> Chỉnh sửa thông tin
                 </a>
             </div>

@@ -37,5 +37,8 @@ match ($act) {
     'anime-search' => (new AnimeController())->search(),
     'handle_signup' => (new AnimeController())->handle_signup(),
     'logout' => (new AnimeController())->logout(),
-    'profile' => (new AnimeController())->profile(), // Thêm route cho trang cá nhân
+    'profile' => (new AnimeController())->profile($_GET['id'] ?? null), 
+    'edit-profile' => (new AnimeController())->editProfile($_GET['id'] ?? null),
+    'update-profile' => (new AnimeController())->updateProfile(),
+
 };

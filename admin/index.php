@@ -45,6 +45,7 @@ match ($act) {
     'add-anime' => (new AdminAnimeController())->add(),
     'create-anime' => (new AdminAnimeController())->create(),
     'logout' => (new AnimeController())->logout(),
+    'update-profile' => (new AnimeController())->updateProfile(),
     default => require_once '../views/admin/404.php'
 };
 ?>

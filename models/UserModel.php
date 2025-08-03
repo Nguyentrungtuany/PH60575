@@ -8,20 +8,18 @@ class UserModel {
         $this->conn = connectDB();
     }
 
-        public function createUser($username, $email, $password_hash) {
-            $sql = "INSERT INTO users (username, email, password_hash, role, avata)
+    public function createUser($username, $email, $password_hash) {
+        $sql = "INSERT INTO users (username, email, password_hash, role, avata)
                 VALUES (:username, :email, :password, 'user', :avata)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
             ':username' => $username,
             ':email' => $email,
             ':password' => $password_hash,
             ':avata' => 'admin/assets/img/team-2.jpg',
             // ':role' => 'user'
-
-
         ]);
-        }
+    }
     
 
     public function findByEmail($email) {
@@ -81,6 +79,14 @@ class UserModel {
         $stmt->bindParam(':avata', $data['avata']);
         return $stmt->execute();
     }
-
+    public function updateProfile($id, $data) {
+        $sql = "UPDATE `users` SET `username` = :username, `email` = :email, `avata` = :avata WHERE `users`.`id` = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $data['username']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':avata', $data['avata']);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
     
 }

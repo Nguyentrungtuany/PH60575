@@ -5,19 +5,19 @@ require_once __DIR__ . '/../models/AnimeModel.php';
 
 class AnimeController
 {
-    public $modelProduct;
-    public $modeluser;
+    public $modelanime;
+    public $userModel;
 
     public function __construct()
     {
-        $this->modelProduct = new AnimeModel();
-        $this->modeluser = new UserModel();
+        $this->modelanime = new AnimeModel();
+        $this->userModel = new UserModel();
 
     }
 
     public function Home()
     {
-        $animes = $this->modelProduct->getTrendingAnimes(); // lấy danh sách trending
+        $animes = $this->modelanime->getTrendingAnimes(); // lấy danh sách trending
         
         require_once './views/index.php'; // truyền $animes sang view
 
@@ -67,7 +67,7 @@ class AnimeController
         $email = $_POST['email'];
         $password = $_POST['password_hash'];
 
-        $user = $this->modeluser->findByEmail($email);
+        $user = $this->userModel->findByEmail($email);
         if ($user && password_verify($password, $user['password_hash'])) {
             $_SESSION['user'] = $user;
         $username = $_SESSION['user']['username']; 
@@ -91,7 +91,7 @@ class AnimeController
     $password = $_POST['password_hash'] ?? '';
     $confirm = $_POST['confirm_password'] ?? '';
 
-    if ($this->modeluser->findByEmail($email)) {
+    if ($this->userModel->findByEmail($email)) {
         echo "<script>alert('Email đã tồn tại'); window.location.href='?act=signup';</script>";
         return;
     }
@@ -104,14 +104,14 @@ class AnimeController
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     // Tạo người dùng
-    $this->modeluser->createUser($username, $email, $hash);
+    $this->userModel->createUser($username, $email, $hash);
 
     echo "<script>alert('Đăng ký thành công!'); window.location.href='?act=login';</script>";
 }
 
     public function search() {
     $keyword = $_GET['keyword'] ?? '';
-    $animes = $this->modelProduct->searchAnime($keyword); // gọi hàm truy vấn SQL
+    $animes = $this->modelanime->searchAnime($keyword); // gọi hàm truy vấn SQL
 
     require_once './views/anime-search.php'; // View kết quả tìm kiếm
 }
@@ -124,10 +124,53 @@ public function logout() {
     exit;
 }
 
-public function profile(){
-    require_once './views/profile.php'; // View trang cá nhân
-    // require_once './views/layout/header.php';
+public function profile($id){
+    $users = $this->userModel->Find($id);
+    require_once './views/profile.php';
 
 }
+public function editProfile($id){
+    $user = $this->userModel->All();
+    $id = $_GET['id'];
+    $user = $this->userModel->Find($id);
+    require_once './views/edit-profile.php'; 
+
+}
+
+
+public function updateProfile(){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
+            'username'      => $_POST['username'] ?? '',
+            'email'         => $_POST['email'] ?? '',
+            'avata'         => null,
+        ];
+
+        $id = $_GET['id'];
+        $user = $this->userModel->Find($id);
+
+        if (isset($_FILES['avata']) && $_FILES['avata']['error'] == 0) {
+            if (!empty($user['avata'])) {
+                $oldAvata = PATH_ASSETS_UPLOADS . $user['avata']; // hoặc dùng đường dẫn trực tiếp
+                if (file_exists($oldAvata)) {
+                    unlink($oldAvata);
+                }
+            }
+            $data['avata'] = uploadFile($_FILES['avata'], 'imganime');
+        } else {
+            $data['avata'] = $user['avata'];
+        }
+
+        $return = $this->userModel->updateProfile($id, $data);
+
+        if ($return) {
+            header("Location: " . BASE_URL . "?act=profile&id=" . $id);
+            exit;
+        } else {
+            echo "Error updating user.";
+        }
+    }
+}
+
 
 }

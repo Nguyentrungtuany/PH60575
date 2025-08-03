@@ -87,7 +87,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li class="dropdown-item text-muted"><i class="bi bi-file-earmark-person"></i> Xin chào, <strong><?php echo htmlspecialchars($_SESSION['user']['username']); ?></strong></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-dark " href="?act=profile"><i class="bi bi-pencil"></i> Cập nhật thông tin</a></li>
+                                    <li><a class="dropdown-item text-dark " href="?act=profile&id=<?= $_SESSION['user']['id'] ?>"><i class="bi bi-pencil"></i> Cập nhật thông tin</a></li>
                                     <li><a class="dropdown-item text-dark" href="?act=logout"><i class="bi bi-door-open"></i> Đăng xuất</a></li>
                                 </ul>
                             </div>
@@ -199,7 +199,11 @@
                         
                         </div>
                     </div>
-                    <div class="popular__product">
+
+
+
+
+                    <!-- <div class="popular__product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
                                 <div class="section-title">
@@ -534,7 +538,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="product__sidebar">

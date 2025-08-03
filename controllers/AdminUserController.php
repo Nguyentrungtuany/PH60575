@@ -70,28 +70,6 @@ class AdminUserController {
         
     }
 
-    // public function add() {
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $data = [
-    //             'username'      => $_POST['username'],
-    //             'email'         => $_POST['email'],
-    //             'role'          => $_POST['role'],
-    //             'password_hash' => $_POST['password_hash'],
-    //             'created_at' => date('Y-m-d H:i:s')
-    //         ];
-
-    //         if (isset($_FILES['avata'])) {
-    //             $data['avata'] = uploadFile($_FILES['avata'], 'imganime');
-    //         } else {
-    //             $data['avata'] = null; // Hoặc giá trị mặc định nếu không có ảnh
-    //         }
-
-    //         $this->userModel->add($data);
-    //         header("Location: " . BASE_URL_ADMIN . "?act=index-admin");
-    //         exit;
-    //     }
-    // }
-
     public function add() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = [
