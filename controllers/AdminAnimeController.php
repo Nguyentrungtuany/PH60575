@@ -3,9 +3,11 @@ require_once __DIR__ . '/../models/AnimeModel.php';
 
 class AdminAnimeController {
     public $AnimeModel;
+    public $modeluser;
 
     public function __construct() {
         $this->AnimeModel = new AnimeModel();
+        $this->modeluser = new UserModel();
     }
     public function index() {
         require_once '../views/admin/index-admin.php';
@@ -98,8 +100,8 @@ class AdminAnimeController {
         exit;
     }
 
-    // Nếu GET thì load form
-    // require_once './views/admin/add-admin.php';
+   
 }
+
 }
 ?>

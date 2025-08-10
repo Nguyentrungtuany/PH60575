@@ -12,12 +12,27 @@ class AnimeModel
         // $sql = "SELECT co.*, ins.name as instructor_name  FROM courses as co 
         // JOIN instructor as ins
         // ON co.instructor_id = ins.id";
-        $sql = "SELECT * FROM anime";
+        $sql = "SELECT a.*, g.name AS genre_name,
+                (SELECT COUNT(*) FROM comments WHERE comments.anime_id = a.id) AS comment_count
+            FROM anime a
+            LEFT JOIN anime_genres ag ON a.id = ag.anime_id
+            LEFT JOIN genres g ON ag.genre_id = g.id
+            ORDER BY a.views DESC 
+            LIMIT 6";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll();
     }
     public function Find($id){
-        $sql = "SELECT * FROM anime WHERE id = :id";
+        $sql = "SELECT a.*, 
+                    g.name AS genre_name,
+                    (SELECT COUNT(*) 
+                        FROM comments 
+                        WHERE comments.anime_id = a.id) AS comment_count
+                FROM anime a
+                LEFT JOIN anime_genres ag ON a.id = ag.anime_id
+                LEFT JOIN genres g ON ag.genre_id = g.id
+                WHERE a.id = :id
+                ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -94,14 +109,7 @@ class AnimeModel
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-//     public function searchAnime($keyword) {
-//     $keyword = "%" . str_replace(" ", "", strtolower($keyword)) . "%";
-//     $sql = "SELECT * FROM anime WHERE REPLACE(LOWER(title), ' ', '') LIKE :keyword";
-//     $stmt = $this->conn->prepare($sql);
-//     $stmt->bindParam(":keyword", $keyword);
-//     $stmt->execute();
-//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
+
 
 public function searchAnime($keyword) {
     $keyword = "%" . str_replace(" ", "", strtolower($keyword)) . "%";
@@ -123,10 +131,5 @@ public function searchAnime($keyword) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
+   
 }
-
-/**
- * Establishes a connection to the anime_db database using PDO.
- */

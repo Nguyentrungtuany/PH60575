@@ -1,4 +1,6 @@
-
+<?php
+// var_dump($_SESSION['user']);
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -87,6 +89,12 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li class="dropdown-item text-muted"><i class="bi bi-file-earmark-person"></i> Xin chào, <strong><?php echo htmlspecialchars($_SESSION['user']['username']); ?></strong></li>
                                     <li><hr class="dropdown-divider"></li>
+                                    <?php
+                                        if ($_SESSION['user']['role'] == 'admin') {
+                                            echo '<li><a class="dropdown-item text-dark " href="' . BASE_URL_ADMIN . '?act=index-admin"><i class="bi bi-pencil"></i> Bảng điều khiển</a></li>';
+
+                                        }
+                                    ?>
                                     <li><a class="dropdown-item text-dark " href="?act=profile&id=<?= $_SESSION['user']['id'] ?>"><i class="bi bi-pencil"></i> Cập nhật thông tin</a></li>
                                     <li><a class="dropdown-item text-dark" href="?act=logout"><i class="bi bi-door-open"></i> Đăng xuất</a></li>
                                 </ul>
@@ -187,7 +195,7 @@
                                         <ul>
                                             <li><?= $anime['genre_name'] ?></li>
                                         </ul>
-                                        <h5><a href="index.php?url=anime/detail&id=<?= $anime['id'] ?>">
+                                        <h5><a href= "?act=anime-details&id=<?= $anime['id'] ?>">
                                             <?= $anime['title'] ?>
                                         </a></h5>
                                     </div>

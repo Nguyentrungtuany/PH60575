@@ -22,12 +22,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 $act = $_GET['act'] ?? '/';
 
 match ($act) {
-    // '/'=> (new AdminAnimeController())->index(),
-
-    // 'dashboard' => (new AdminAnimeController())->dashboard(),
-    // 'product-list' => (new AdminAnimeController())->list(),
-    // 'product-edit' => (new AdminAnimeController())->edit($_GET['id'] ?? null),
-    // 'product-update' => (new AdminAnimeController())->update($_POST),
+    
     'handle_login' => (new AnimeController())->handle_login(),
     '/' => (new AdminUserController())->list(),
     'index-admin' => (new AdminUserController())->list(),
@@ -38,7 +33,6 @@ match ($act) {
     'create-admin' => (new AdminUserController())->create(),
     'anime-admin' => (new AdminAnimeController())->list(),
     'anime-add' => (new AdminAnimeController())->add(),
-    // 'anime-admin' => (new AdminAnimeController())->list(),
     'delete-anime' => (new AdminAnimeController())->Delete($_GET['id'] ?? null),
     'edit-anime' => (new AdminAnimeController())->edit($_GET['id'] ?? null),
     'update-anime' => (new AdminAnimeController())->update(),
@@ -46,6 +40,8 @@ match ($act) {
     'create-anime' => (new AdminAnimeController())->create(),
     'logout' => (new AnimeController())->logout(),
     'update-profile' => (new AnimeController())->updateProfile(),
+    'cmt-admin' => (new AdminUserController())->cmt(),
+    'delete-cmt' => (new AdminUserController())->deleteCmt($_GET['id'] ?? null),
     default => require_once '../views/admin/404.php'
 };
 ?>

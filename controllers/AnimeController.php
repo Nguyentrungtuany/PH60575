@@ -73,8 +73,8 @@ class AnimeController
         $username = $_SESSION['user']['username']; 
 
             if ($user['role'] === 'admin') {
-                header('Location: ./admin/index.php');
-                exit; // 🔥 BẮT BUỘC
+                header('Location: index.php');
+                exit; 
             } else {
                 header('Location: index.php');
                 exit;
@@ -141,14 +141,19 @@ public function editProfile($id){
 public function updateProfile(){
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = [
-            'username'      => $_POST['username'] ?? '',
-            'email'         => $_POST['email'] ?? '',
+            'username'      => $_POST['username'] ,
+            'email'         => $_POST['email'] ,
             'avata'         => null,
         ];
 
         $id = $_GET['id'];
         $user = $this->userModel->Find($id);
-
+        if (empty($data['username'])) {
+            $data['username'] = $user['username'];
+        }
+        if (empty($data['email'])) {
+            $data['email'] = $user['email'];
+        }
         if (isset($_FILES['avata']) && $_FILES['avata']['error'] == 0) {
             if (!empty($user['avata'])) {
                 $oldAvata = PATH_ASSETS_UPLOADS . $user['avata']; // hoặc dùng đường dẫn trực tiếp
@@ -172,5 +177,32 @@ public function updateProfile(){
     }
 }
 
+public function animeDetail($id) {
+    $anime = $this->modelanime->Find($id);
+    $comments = $this->userModel->comment($id);
+
+    require_once './views/anime-details.php'; // Hiển thị chi tiết anime
+}
+public function addcmt($id) {
+    if (!isset($_SESSION['user'])) {
+        echo "";
+        return;
+    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
+            'user_id' => $_SESSION['user']['id'],
+            'anime_id' => $id,
+            'content' => $_POST['content']
+        ];
+        $return = $this->userModel->addcmt($data);
+        if($return){
+            header("Location: " . BASE_URL . "?act=animeDetail&id=" . $id);
+            exit;
+        }else{
+            echo "Lỗi !!!";
+        }
+       
+    }
+}
 
 }

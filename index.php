@@ -25,7 +25,7 @@ match ($act) {
     '/' => (new AnimeController())->Home(),
     'index' => (new AnimeController())->Home(),
     'categories' => (new AnimeController())->categories(),
-    'anime-details' => (new AnimeController())->details(),
+    // 'anime-details' => (new AnimeController())->details(),
     'anime-watching' => (new AnimeController())->watching(),
     'blog-details' => (new AnimeController())->blog_details(),
     'signup' => (new AnimeController())->signup(),
@@ -40,5 +40,7 @@ match ($act) {
     'profile' => (new AnimeController())->profile($_GET['id'] ?? null), 
     'edit-profile' => (new AnimeController())->editProfile($_GET['id'] ?? null),
     'update-profile' => (new AnimeController())->updateProfile(),
+    'anime-details' => (new AnimeController())->animeDetail($_GET['id'] ?? null),
+    'addcmt' => (new AnimeController())->addcmt($_GET['id'] ?? null),
 
 };

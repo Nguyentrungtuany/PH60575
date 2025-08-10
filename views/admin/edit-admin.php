@@ -64,7 +64,7 @@
                         </select>
                         <input type="text" name="password_hash" id="password_hash"
                                class=" text-sm text-slate-600"
-                               value="<?= htmlspecialchars($user['password_hash'] ?? '') ?>" />
+                               value="<?= htmlspecialchars($user['password_hash'] ?? '') ?>" disabled/>
                     </td>
                   </tr>
 

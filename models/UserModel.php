@@ -88,5 +88,36 @@ class UserModel {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
-    
+    public function comment($id){
+        $sql = "SELECT c.*, u.* 
+            FROM comments c
+            JOIN users u ON c.user_id = u.id
+            WHERE c.anime_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+public function addcmt($data){
+    $sql = "INSERT INTO `comments` (`id`, `user_id`, `anime_id`, `content`, `created_at`) VALUES (NULL, :user_id, :anime_id, :content, CURRENT_TIMESTAMP)";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':user_id', $data['user_id']);
+    $stmt->bindParam(':anime_id', $data['anime_id']);
+    $stmt->bindParam(':content', $data['content']);
+    return $stmt->execute();
+}
+public function cmt(){
+    $sql = "SELECT * FROM `comments`";
+    $comments = $this->conn->query($sql);
+    return $comments->fetchAll(PDO::FETCH_ASSOC);
+}
+public function deleteCmt($id){
+    $sql = "DELETE FROM `comments` WHERE `comments`.`id` = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    return $stmt->execute();
+
+}
+
+
 }

@@ -35,15 +35,17 @@ class AdminUserController {
             'username'      => $_POST['username'],
             'email'         => $_POST['email'],
             'role'          => $_POST['role'],
-            'password_hash' => $_POST['password_hash'],
         ];
 
         $id = $_GET['id'];
         $user = $this->userModel->Find($id);
+        if (empty($data['password_hash'])) {
+            $data['password_hash'] = $user['password_hash'];
+        }
 
         if (isset($_FILES['avata']) && $_FILES['avata']['error'] == 0) {
             if (!empty($user['avata'])) {
-                $oldAvata = PATH_ASSETS_UPLOADS . $user['avata']; // hoặc dùng đường dẫn trực tiếp
+                $oldAvata = PATH_ASSETS_UPLOADS . $user['avata'];
                 if (file_exists($oldAvata)) {
                     unlink($oldAvata);
                 }
@@ -75,27 +77,38 @@ class AdminUserController {
         $data = [
             'username'       => $_POST['username'],
             'email'          => $_POST['email'],
-            'password_hash'  => $_POST['password_hash'],
+            // 'password_hash'  => $_POST['password_hash'],
             'role'           => $_POST['role'],
         ];
 
-        // Kiểm tra nếu có file upload
         if (isset($_FILES['avata']) && $_FILES['avata']['error'] === 0) {
             $data['avata'] = uploadFile($_FILES['avata'], 'imganime');
         } else {
-            // ❗ Nếu không upload thì gán ảnh mặc định
             $data['avata'] = 'admin/assets/img/team-2.jpg';
         }
 
-        // Gọi hàm lưu vào DB
         $this->userModel->add($data);
 
         header("Location: " . BASE_URL_ADMIN . "?act=index-admin");
         exit;
     }
-
-    // Nếu GET thì load form
-    // require_once './views/admin/add-admin.php';
 }
+public function cmt(){
+    $cmt = $this->userModel->cmt();
 
+    require_once __DIR__ . '/../views/admin/cmt-admin.php';
+}
+public function deleteCmt($id) {
+    if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+        header('Location: index.php?act=login');
+        exit;
+    }
+    $return = $this->userModel->deleteCmt($id);
+    if ($return) {
+        header("Location: " . BASE_URL_ADMIN . "?act=cmt-admin");
+        exit;
+    } else {
+        echo "Error deleting comment.";
+    }
+}
 }

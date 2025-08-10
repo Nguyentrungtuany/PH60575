@@ -1,3 +1,11 @@
+<?php
+if(!isset($_SESSION['user'])) {
+    header("Location: " . BASE_URL . "?act=login");
+    exit;
+}else{
+    header("Location: " . BASE_URL . "?act=index");
+}
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
