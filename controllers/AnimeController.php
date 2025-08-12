@@ -48,11 +48,7 @@ class AnimeController
         require_once './views/signup.php';
 
     }
-    // public function login()
-    // {
-    //     require_once './views/login.php';
-
-    // }
+    
     public function blog()
     {
         require_once './views/blog.php';
@@ -196,7 +192,7 @@ public function addcmt($id) {
         ];
         $return = $this->userModel->addcmt($data);
         if($return){
-            header("Location: " . BASE_URL . "?act=animeDetail&id=" . $id);
+            header("Location: " . BASE_URL . "?act=anime-details&id=" . $id);
             exit;
         }else{
             echo "Lỗi !!!";

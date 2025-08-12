@@ -1,31 +1,21 @@
 <?php 
-// Require toàn bộ các file khai báo môi trường, thực thi,...(không require view)
 session_start();
-
-// Require file Common
-require_once './commons/env.php'; // Khai báo biến môi trường
-require_once './commons/function.php'; // Hàm hỗ trợ
-
-// Require toàn bộ file Controllers
+require_once './commons/env.php'; 
+require_once './commons/function.php'; 
 require_once './controllers/AnimeController.php';
 require_once './controllers/AdminUserController.php'; 
-require_once './controllers/AdminAnimeController.php'; // Thêm AnimeController nếu cần
-
-// Require toàn bộ file Models
+require_once './controllers/AdminAnimeController.php';
 require_once './models/AnimeModel.php';
 require_once './models/UserModel.php';
 
-// Route
 $act = $_GET['act'] ?? '/';
 
 
-// Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
 match ($act) {
     '/' => (new AnimeController())->Home(),
     'index' => (new AnimeController())->Home(),
     'categories' => (new AnimeController())->categories(),
-    // 'anime-details' => (new AnimeController())->details(),
     'anime-watching' => (new AnimeController())->watching(),
     'blog-details' => (new AnimeController())->blog_details(),
     'signup' => (new AnimeController())->signup(),
@@ -42,5 +32,6 @@ match ($act) {
     'update-profile' => (new AnimeController())->updateProfile(),
     'anime-details' => (new AnimeController())->animeDetail($_GET['id'] ?? null),
     'addcmt' => (new AnimeController())->addcmt($_GET['id'] ?? null),
+    default => require_once './views/404.php'
 
 };

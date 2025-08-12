@@ -76,6 +76,7 @@
                              value="<?= $user['created_at'] ?? 'N/A' ?>" disabled />
                     </td>
                   </tr>
+                  
 
                 </tbody>
               </table>

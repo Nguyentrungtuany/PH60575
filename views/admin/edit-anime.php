@@ -79,7 +79,36 @@
                                name="episodes_released" value="<?= htmlspecialchars($anime['episodes_released'] ?? '') ?>" />
                     </td>
                   </tr>
+                  <!-- <tr>
+                    <td class="px-6 py-3 font-bold bg-gray-100">Danh mục</td>
+                    <td class="px-6 py-3">
+                        <input class="" 
+                               name="episodes_total" value="" />
+                    </td>
+                  </tr> -->
+                  <tr>
+    <td class="px-6 py-3 font-bold bg-gray-100">Danh mục</td>
+<td class="px-6 py-3">
+    <!-- Hiển thị tên thể loại hiện tại -->
+    <span class="block mb-2 text-sm text-gray-600">
+        <?= htmlspecialchars($anime['genre_name'] ?? 'Chưa có thể loại') ?>
+    </span>
 
+    <!-- Input ẩn gửi anime_id -->
+    <input type="hidden" name="anime_id" value="<?= htmlspecialchars($anime['id'] ?? '') ?>">
+<select name="genre_id" ...>
+    <option value="" disabled <?= empty($anime['genre_id']) ? 'selected' : '' ?>>Chọn thể loại</option>
+    <?php foreach ($genres as $genre): ?>
+        <option value="<?= $genre['id'] ?>" <?= ($anime['genre_id'] ?? '') == $genre['id'] ? 'selected' : '' ?>>
+            <?= htmlspecialchars($genre['name']) ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+
+</td>
+
+</tr>
+                  
                 </tbody>
               </table>
 

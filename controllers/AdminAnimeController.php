@@ -30,6 +30,7 @@ class AdminAnimeController {
         $anime = $this->AnimeModel->All();
         $id = $_GET['id'];
         $anime = $this->AnimeModel->Find($id);
+        $genres = $this->AnimeModel->AllGenres();
         require_once __DIR__ . '/../views/admin/edit-anime.php';
     }
 
@@ -61,6 +62,13 @@ class AdminAnimeController {
         }
 
         $return = $this->AnimeModel->update($id, $data);
+        $genreId = $this -> AnimeModel->UpdateGenres([
+            'anime_id' => $id,
+            'genre_id' => $_POST['genre_id']
+        ]);
+            print_r($genreId);
+            echo "<hr>";
+            print_r($data);
 
         if ($return) {
             header("Location: " . BASE_URL_ADMIN . "?act=anime-admin");
@@ -103,5 +111,49 @@ class AdminAnimeController {
    
 }
 
+public function genres() {
+        $genres = $this->AnimeModel->Genres();
+        require_once __DIR__ . '/../views/admin/genres-admin.php';
+    }
+
+    public function addGenres() {
+        require_once __DIR__ . '/../views/admin/add-genres.php';
+    }
+
+    public function editGenres($id) {
+        $id = $_GET['id'];
+        $genre = $this->AnimeModel->FindGenre($id);
+        require_once __DIR__ . '/../views/admin/edit-genres.php';
+    }
+
+    public function UpdateGenre() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'name' => $_POST['name'],
+            ];
+            $id = $_GET['id'];
+            $this->AnimeModel->UpdateGenre($id, $data);
+            header("Location: " . BASE_URL_ADMIN . "?act=genres-admin");
+            exit;
+        }
+    }
+
+    public function deleteGenres($id) {
+        $this->AnimeModel->deleteGenres($id);
+        header("Location: " . BASE_URL_ADMIN . "?act=genres-admin");
+        exit;
+}
+
+public function createGenres() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
+            'name' => $_POST['name'],
+        ];
+
+        $this->AnimeModel->AddGenres($data);
+        header("Location: " . BASE_URL_ADMIN . "?act=genres-admin");
+        exit;
+    }
+}
 }
 ?>

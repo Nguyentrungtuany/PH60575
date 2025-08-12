@@ -78,6 +78,14 @@
           </li>
 
           <li class="mt-0.5 w-full">
+            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="?act=genres-admin">
+              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
+                <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
+              </div>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Quản lý danh mục</span>
+            </a>
+          </li>
+          <!-- <li class="mt-0.5 w-full">
             <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="../pages/virtual-reality.html">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
@@ -124,26 +132,11 @@
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign Up</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
 
-      <div class="mx-4">
-        <!-- load phantom colors for card after: -->
-        <p class="invisible hidden text-gray-800 text-red-500 text-red-600 text-blue-500 after:bg-gradient-to-tl after:from-zinc-800 after:to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 after:from-blue-700 after:to-cyan-500 after:from-orange-500 after:to-yellow-500 after:from-green-600 after:to-lime-400 after:from-red-600 after:to-orange-600 after:from-slate-600 after:to-slate-300 text-emerald-500 text-cyan-500 text-slate-400"></p>
-        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border" sidenav-card>
-          <img class="w-1/2 mx-auto" src="../assets/img/illustrations/icon-documentation.svg" alt="sidebar illustrations" />
-          <div class="flex-auto w-full p-4 pt-0 text-center">
-            <div class="transition-all duration-200 ease-nav-brand">
-              <h6 class="mb-0 dark:text-white text-slate-700">Need help?</h6>
-              <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Please check our docs</p>
-            </div>
-          </div>
-        </div>
-        <a href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/" target="_blank" class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px">Documentation</a>
-        <!-- pro btn  -->
-        <a class="inline-block w-full px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px" href="https://www.creative-tim.com/product/argon-dashboard-pro-tailwind?ref=sidebarfree" target="_blank">Upgrade to pro</a>
-      </div>
+     
     </aside>
 
     <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
@@ -178,7 +171,7 @@
               <li class="flex items-center">
                 <a href="../pages/sign-in.html" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
                   <i class="fa fa-user sm:mr-1"></i>
-                  <span class="hidden sm:inline">Sign In</span>
+                  <!-- <span class="hidden sm:inline">Sign In</span> -->
                 </a>
               </li>
               <li class="flex items-center pl-4 xl:hidden">
@@ -327,7 +320,6 @@
                             <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"><?php echo $data['created_at'] ?></span>
                           </td>
                           <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                            <a href="?act=edit-cmt&id=<?php echo $data['id'] ?>" class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"> Edit </a>
                             <a href="?act=delete-cmt&id=<?php echo $data['id'] ?>" class="bg-gradient-to-tl from-blue-500 to-purple-400 px-2.5 text-xs rounded-full py-1 inline-block font-bold uppercase text-white"> Xóa </a>
                           </td>
                         </tr>

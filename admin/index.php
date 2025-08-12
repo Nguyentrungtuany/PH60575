@@ -42,6 +42,12 @@ match ($act) {
     'update-profile' => (new AnimeController())->updateProfile(),
     'cmt-admin' => (new AdminUserController())->cmt(),
     'delete-cmt' => (new AdminUserController())->deleteCmt($_GET['id'] ?? null),
-    default => require_once '../views/admin/404.php'
+    'genres-admin' => (new AdminAnimeController())->genres(),
+    'add-genres' => (new AdminAnimeController())->addGenres(),
+    'create-genres' => (new AdminAnimeController())->createGenres(),
+    'edit-genres' => (new AdminAnimeController())->editGenres($_GET['id'] ?? null),
+    'update-genres'=> (new AdminAnimeController())->updateGenre(),
+    'delete-genres' => (new AdminAnimeController())->deleteGenres($_GET['id'] ?? null),
+    default => require_once '../views/404.php'
 };
 ?>
